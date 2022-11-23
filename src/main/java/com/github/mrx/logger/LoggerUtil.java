@@ -1,5 +1,8 @@
 package com.github.mrx.logger;
 
+import com.github.mrx.logger.handler.DynamicLogHandler;
+import com.github.mrx.logger.handler.Log4j2LogHandler;
+import com.github.mrx.logger.handler.LogbackLogHandler;
 import org.slf4j.Logger;
 import org.slf4j.event.Level;
 
@@ -14,8 +17,8 @@ public class LoggerUtil {
     private static final Set<PackageScanner> scanners = new HashSet<>();
 
     static {
-        // 暂时只有一个 Logback 的 handler
-        handlers.add(new LogbackDynamicLogHandler());
+        handlers.add(new LogbackLogHandler());
+        handlers.add(new Log4j2LogHandler());
         // 默认使用 Reflections 做包扫描
         scanners.add(new ReflectionsPackageScanner());
     }
@@ -51,7 +54,7 @@ public class LoggerUtil {
      * 设置指定 logger 的 日志等级
      */
     public static void setLevel(Logger logger, Level level) {
-        handlers.stream().filter(it -> it.support(logger.getClass())).findFirst().ifPresent(it -> it.handle(logger, level));
+        handlers.stream().filter(it -> it.support(logger.getClass())).findFirst().ifPresent(it -> it.setLevel(logger, level));
     }
 
 }

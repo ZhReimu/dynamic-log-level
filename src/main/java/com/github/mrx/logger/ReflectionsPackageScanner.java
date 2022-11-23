@@ -1,5 +1,6 @@
 package com.github.mrx.logger;
 
+import com.github.mrx.logger.handler.DynamicLogHandler;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

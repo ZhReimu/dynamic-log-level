@@ -1,5 +1,7 @@
 package com.github.mrx.logger;
 
+import com.github.mrx.logger.handler.DynamicLogHandler;
+
 import java.util.Set;
 
 public interface PackageScanner {
