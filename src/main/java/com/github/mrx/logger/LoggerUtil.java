@@ -54,7 +54,7 @@ public class LoggerUtil {
      * 设置指定 logger 的 日志等级
      */
     public static void setLevel(Logger logger, Level level) {
-        handlers.stream().filter(it -> it.support(logger.getClass())).findFirst().ifPresent(it -> it.setLevel(logger, level));
+        handlers.stream().filter(it -> it.loggerExists() && it.support(logger)).findFirst().ifPresent(it -> it.setLevel(logger, level));
     }
 
 }

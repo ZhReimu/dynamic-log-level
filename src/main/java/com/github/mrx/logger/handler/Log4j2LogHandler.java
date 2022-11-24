@@ -7,8 +7,6 @@ import java.lang.reflect.Field;
 
 public class Log4j2LogHandler implements DynamicLogHandler {
 
-    private static final String LOGGER_CLASS_NAME = "org.apache.logging.slf4j.Log4jLogger";
-
     @Override
     public void handle(Logger logger, Level level) throws Exception {
         Field loggerField = logger.getClass().getDeclaredField("logger");
@@ -19,13 +17,13 @@ public class Log4j2LogHandler implements DynamicLogHandler {
     }
 
     @Override
-    public boolean support(Class<?> loggerClazz) {
-        return LOGGER_CLASS_NAME.equals(loggerClazz.getName());
+    public boolean support(Logger logger) {
+        return logger instanceof org.apache.logging.slf4j.Log4jLogger;
     }
 
     @Override
     public String loggerClass() {
-        return LOGGER_CLASS_NAME;
+        return "org.apache.logging.slf4j.Log4jLogger";
     }
 
 }

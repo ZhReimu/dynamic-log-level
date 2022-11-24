@@ -15,7 +15,7 @@ public interface DynamicLogHandler {
 
     void handle(Logger logger, Level level) throws Exception;
 
-    boolean support(Class<?> loggerClazz);
+    boolean support(Logger logger);
 
     default boolean loggerExists() {
         try {
